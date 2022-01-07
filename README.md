@@ -2,11 +2,14 @@
 <p align="center">f@#k netflix use notflix a tool which search magnet links and stream it with webtorrent</p>
 
 ## This is a fork of Bugswriter/notflix
-The original project is Bugswriter/notflix.
+The original project is [Bugswriter/notflix](https://github.com/Bugswriter/notflix).
+
 This is a version made to be compatible with MacOS.
+### Differences
 - Replaced dmenu with command line input, less beautifull but compatible
 - Replaced notify-send with [TODO]
 - Replaced grep -P
+- Updated 1337x address
 
 ##
 <p align="center">
