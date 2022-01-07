@@ -1,3 +1,6 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/ale-ben/notflix-macos/badge)](https://www.codefactor.io/repository/github/ale-ben/notflix-macos)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/356f544150d048588d58d08e7ca582cb)](https://www.codacy.com/gh/ale-ben/notflix-macos/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ale-ben/notflix-macos&amp;utm_campaign=Badge_Grade)
+
 <h1 align="center">NOTFLIX MacOS</h1>
 <p align="center">f@#k netflix use notflix a tool which search magnet links and stream it with webtorrent</p>
 
