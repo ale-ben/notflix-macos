@@ -1,5 +1,12 @@
-<h1 align="center">NOTFLIX</h1>
+<h1 align="center">NOTFLIX MacOS</h1>
 <p align="center">f@#k netflix use notflix a tool which search magnet links and stream it with webtorrent</p>
+
+## This is a fork of Bugswriter/notflix
+The original project is Bugswriter/notflix.
+This is a version made to be compatible with MacOS.
+- Replaced dmenu with command line input, less beautifull but compatible
+- Replaced notify-send with [TODO]
+- Replaced grep -P
 
 ##
 <p align="center">
