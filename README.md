@@ -2,8 +2,9 @@
 <p align="center">f@#k netflix use notflix a tool which search magnet links and stream it with webtorrent</p>
 
 ## This is a fork of Bugswriter/notflix
-https://api.codiga.io/project/30639/score/svg
-https://api.codiga.io/project/30639/status/svg
+![Codiga Code Quality Score](https://api.codiga.io/project/30639/score/svg)
+
+![Codiga Code Grade](https://api.codiga.io/project/30639/status/svg)
 
 The original project is [Bugswriter/notflix](https://github.com/Bugswriter/notflix).
 
