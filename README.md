@@ -7,7 +7,7 @@ The original project is [Bugswriter/notflix](https://github.com/Bugswriter/notfl
 This is a version made to be compatible with MacOS.
 ### Differences
 - Replaced dmenu with command line input, less beautifull but compatible
-- Replaced notify-send with [TODO]
+- Replaced notify-send with terminal-notifier
 - Replaced grep -P
 - Updated 1337x address
 
@@ -26,7 +26,9 @@ For scraping, the script uses simple gnu utils like sed, awk, paste, cut.
 
 ## Requirements
 
+* [nodeJS](https://nodejs.org/en/) > 12.20
 * [webtorrent](https://webtorrent.io/) - A tool to stream torrent. `npm install webtorrent-cli -g`
+* [OPTIONAL][Terminal Notifier](https://formulae.brew.sh/formula/terminal-notifier) - A tool to crerate notifications from terminal `brew install terminal-notifier`
 
 ## Installation
 
