@@ -11,11 +11,6 @@ This is a version made to be compatible with MacOS.
 - Replaced grep -P
 - Updated 1337x address
 
-##
-<p align="center">
-<img src="./preview.gif" alt="Video Preview" width="500px">
-</p>
-
 > Watch my video on this - [bugswriter's notflix](https://youtu.be/RFJCL9C46Mc)
 
 ### How does this work?
