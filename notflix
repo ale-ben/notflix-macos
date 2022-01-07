@@ -1,15 +1,15 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Dependencies - webtorrent, mpv
 
 mkdir -p $HOME/.cache/notflix
 
-menu="dmenu -i -l 25"
-baseurl="https://1337x.wtf"
+baseurl="https://www.1377x.to"
 cachedir="$HOME/.cache/notflix"
 
 if [ -z $1 ]; then
-  query=$(dmenu -p "Search Torrent: " <&-)
+	echo Search torrent:	
+  read query
 else
   query=$1
 fi
@@ -25,7 +25,7 @@ grep -o '<a href="/torrent/.*</a>' $cachedir/tmp.html |
 
 result_count=$(wc -l $cachedir/titles.bw | awk '{print $1}')
 if [ "$result_count" -lt 1 ]; then
-  notify-send "😔 No Result found. Try again 🔴" -i "NONE"
+	osascript -e 'tell app "System Events" to display alert "Notflix" message "😔 No Result found. Try again 🔴"'
   exit 0
 fi
 
@@ -50,25 +50,46 @@ sed 's/\./ /g; s/\-/ /g' $cachedir/titles.bw |
 awk '{print NR " - ["$0"]"}' $cachedir/size.bw > $cachedir/tmp && mv $cachedir/tmp $cachedir/size.bw
 awk '{print "[S:"$1 ", L:"$2"]" }' $cachedir/seedleech.bw > $cachedir/tmp && mv $cachedir/tmp $cachedir/seedleech.bw
 
-# Getting the line number
-LINE=$(paste -d\   $cachedir/size.bw $cachedir/seedleech.bw $cachedir/titles.bw |
-  $menu |
-  cut -d\- -f1 |
-  awk '{$1=$1; print}')
+echo "Here is what I found:"
 
-if [ -z "$LINE" ]; then
-  notify-send "😔 No Result selected. Exiting... 🔴" -i "NONE"
+# Getting the input line number
+input=$cachedir/titles.bw
+while IFS= read -r line
+do
+  printf 'Working on %s file...\n' "$line"
+done < "$input"
+
+# Formatting the output string
+input=$(paste -d\   $cachedir/size.bw $cachedir/seedleech.bw $cachedir/titles.bw)
+
+# Getting user choice
+printf '%s\n' "$input"
+
+printf "Choose: "
+read LINE
+if ! [[ "$LINE" =~ ^[0-9]+$ ]] ; 
+ then exec >&2; echo "error: Not a number"; exit 1
+fi
+
+if [ "$LINE" -gt "$result_count" ]; then
+	osascript -e 'tell app "System Events" to display alert "Notflix" message "😔 Index out of range. Try again 🔴"'
   exit 0
 fi
-notify-send "🔍 Searching Magnet seeds 🧲" -i "NONE"
+
+if [ -z "$LINE" ]; then
+	osascript -e 'tell app "System Events" to display alert "Notflix" message "😔 No Result selected. Exiting... 🔴"'
+  exit 0
+fi
+
+terminal-notifier -title "Notflix" -message "🔍 Searching Magnet seeds 🧲"
 url=$(head -n $LINE $cachedir/links.bw | tail -n +$LINE)
 fullURL="${baseurl}${url}/"
 
 # Requesting page for magnet link
 curl -s $fullURL > $cachedir/tmp.html
-magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" $cachedir/tmp.html | head -n 1) 
-
+#magnet=$(grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" $cachedir/tmp.html | head -n 1) 
+magnet=$(perl -nle'print $& while m{magnet:\?xt=urn:btih:[a-zA-Z0-9]*}g' $cachedir/tmp.html | head -n 1) 
 webtorrent "$magnet" --mpv
 
 # Simple notification
-notify-send "🎥 Enjoy Watching ☺️ " -i "NONE"
+terminal-notifier -title "Notflix" -message "🎥 Enjoy Watching ☺️ " -i "NONE"
